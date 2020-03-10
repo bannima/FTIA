@@ -7,10 +7,6 @@ Author: Barry Chow
 Date: 2019/1/29 10:44 AM
 Version: 0.1
 """
-from __future__ import print_function
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 import torch
 import torch.nn as nn
@@ -23,13 +19,13 @@ from tools import saveTextRepresentations,saveTextLabels
 from tools import delMiddleReprLabelFiles,delMiddleContentWeightFiles
 from tools import save_attention_weights,save_contents
 import csv
-from config import result_filename
-from config import hyperparams
+from .config import result_filename
+from .config import hyperparams
 #from visualization.tSNE_implementation import t_SNE_visualization
 import numpy as np
-from tools import loadTextRepresentations,loadTextLabels
-from config import global_datasetType,global_classifierType
-from datetime import datetime
+from .tools import loadTextRepresentations,loadTextLabels
+from .config import global_datasetType,global_classifierType
+from .datetime import datetime
 
 def str2arr(content,word2idx):
     content = [word2idx[word] for word in content.split()]
@@ -365,7 +361,11 @@ if __name__ =='__main__':
     #run_model_with_hyperparams(hyperparams, datasetType='UsptoPatent', classifierType='FTIA')
 
     #attention weight visualization
-    #run_model_with_hyperparams(hyperparams,datasetType='UsptoPatent',classifierType='FTIA')
+    for model in ['TextCNN','BiGRU','LSTMAtt','SelfAtt','FTIA']:
+        run_model_with_hyperparams(hyperparams,datasetType='UsptoPatent',classifierType=model)
 
     #attention weight for TREC
-    run_model_with_hyperparams(hyperparams, datasetType='TREC', classifierType='SelfAtt')
+    #run_model_with_hyperparams(hyperparams, datasetType='TREC', classifierType='SelfAtt')
+
+    # attention weight for CR
+    #run_model_with_hyperparams(hyperparams, datasetType='CR', classifierType='FTIA')

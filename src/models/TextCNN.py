@@ -7,9 +7,9 @@ Author: Barry Chow
 Date: 2019/1/29 7:28 PM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#import sys
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -24,7 +24,7 @@ class TextCNNClassifer(nn.Module):
         self.conv1 = nn.Conv2d(1,10,kernel_size=(5,hidden_size))
         #self.conv2 = nn.Conv2d(10,20,kernel_size=5)
         self.mp = nn.MaxPool2d(2)
-        self.fc = nn.Linear(510,output_size)
+        self.fc = nn.Linear(11570,output_size)
 
     def forward(self,input,seq_lengths,labels):
         input_size = input.size(0)

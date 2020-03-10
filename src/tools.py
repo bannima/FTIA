@@ -7,14 +7,11 @@ Author: Barry Chow
 Date: 2019/1/29 6:52 PM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
 from torch.autograd import Variable
 import torch
-from wordvectors.static_vectors import StaticWordVectors
-from wordvectors.pretrain_wordvectors import PretrainedWordVectors
-from config import result_filename
+from .wordvectors import StaticWordVectors
+from .wordvectors import PretrainedWordVectors
+from .config import result_filename
 import csv
 import os
 import numpy as np
@@ -32,17 +29,17 @@ def create_variable(tensor):
 #load word vectors
 def loadWordVectors(word2idx,datasetType,HIDDEN_SIZE,isStatic=True,isRand=False,corpus=None):
     if isRand:
-        print '---- using random initialized word vectors ----'
+        print('---- using random initialized word vectors ----')
         return None
 
     if isStatic:
         # static word vectors
-        print '---- using static GloVe word vectors ----'
+        print('---- using static GloVe word vectors ----')
         wordvectors = StaticWordVectors(word2idx, dim=HIDDEN_SIZE)
     else:
         # pretrained word vectors
         #deprecated methods
-        print '---- using pretrained word2vec vectors by corpus ----'
+        print('---- using pretrained word2vec vectors by corpus ----')
         wordvectors = PretrainedWordVectors(corpus,datasetType,word2idx,dim=HIDDEN_SIZE)
     return create_variable(wordvectors.get_wordVectors())
 

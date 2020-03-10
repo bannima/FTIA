@@ -7,9 +7,9 @@ Author: Barry Chow
 Date: 2019/3/2 10:15 AM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#import sys
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 import torch
 import torch.nn as nn
 from torch.nn.utils.rnn import pack_padded_sequence,pad_packed_sequence

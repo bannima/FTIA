@@ -7,9 +7,9 @@ Author: Barry Chow
 Date: 2019/4/4 10:58 AM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#import sys
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 import json
 
 classdef = {
@@ -56,5 +56,5 @@ if __name__ =='__main__':
             #print patent['patent_number']
         except Exception as e:
             error_count+=1
-    print 'error object ',error_count
-    print class_count
+    print('error object ',error_count)
+    print(class_count)

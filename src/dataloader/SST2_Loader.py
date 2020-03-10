@@ -7,9 +7,9 @@ Author: Barry Chow
 Date: 2019/2/6 7:02 PM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#import sys
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 from torch.utils.data import Dataset,DataLoader
 from preprocess import clean_str
 
@@ -50,10 +50,10 @@ class SST2DataLoader(Dataset):
             self.idx2label[idx] = label
             idx +=1
 
-        print ' num of words in vocabulary ', len(self.word2idx.keys())
-        print ' num of samples in train dataset', len(self.train_dataset)
-        print ' num of samples in test dataset', len(self.test_dataset)
-        print ' num of samples in all dataset',len(self.train_dataset)+len(self.test_dataset)
+        print(' num of words in vocabulary ', len(self.word2idx.keys()))
+        print(' num of samples in train dataset', len(self.train_dataset))
+        print(' num of samples in test dataset', len(self.test_dataset))
+        print(' num of samples in all dataset',len(self.train_dataset)+len(self.test_dataset))
 
 
     def load_dataset(self,filename):

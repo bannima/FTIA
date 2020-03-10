@@ -7,9 +7,9 @@ Author: Barry Chow
 Date: 2019/2/2 11:23 PM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#import sys
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 import torch
 import torch.nn as nn
 import random
@@ -73,10 +73,10 @@ class CustomerReviewDataset(object):
         self.testset = self.contents[int(self.len * self.occupy):]
 
         #
-        print ' num of words in vocabulary ',len(self.word2idx.keys())
-        print ' num of samples in train dataset',len(self.trainset)
-        print ' num of samples in test dataset',len(self.testset)
-        print ' num of samples in all dataset',len(self.trainset)+len(self.testset)
+        print(' num of words in vocabulary ',len(self.word2idx.keys()))
+        print(' num of samples in train dataset',len(self.trainset))
+        print(' num of samples in test dataset',len(self.testset))
+        print(' num of samples in all dataset',len(self.trainset)+len(self.testset))
 
 
     def get_vocab(self):

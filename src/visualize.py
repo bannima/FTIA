@@ -7,9 +7,7 @@ Author: Barry Chow
 Date: 2019/2/22 8:37 PM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+
 import csv
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
@@ -17,8 +15,8 @@ import matplotlib.font_manager as fm
 #from sklearn.model_selection import GridSearchCV
 from src.config import result_filename
 import numpy as np
-from tools import load_attention_weights,load_contents
-from visualization.tSNE_implementation import t_SNE_visualization
+from .tools import load_attention_weights,load_contents
+from .visualization.tSNE_implementation import t_SNE_visualization
 #global settings
 myfont = fm.FontProperties(fname='/Users/Barry/Library/Fonts/SimHei.ttf')
 epochs = 10
@@ -27,8 +25,8 @@ target_names = ['A','B','C']
 global_colors = ['darkgreen',"crimson",'dodgerblue','darkturquoise','dimgray','darkviolet','darkorange']
 
 fig_path = '../figs/'
-from tools import loadTextRepresentations,loadTextLabels
-from visualization.attention_weights_visualization import showAttentionWeightsForContent
+from .tools import loadTextRepresentations,loadTextLabels
+from .visualization.attention_weights_visualization import showAttentionWeightsForContent
 
 def visualization_acc(x_axis,data,filename,x_label='epochs'):
     plt.cla()
@@ -150,26 +148,26 @@ def visualizeMultiBarForVariations():
     hyperparams['isStatic']=True
     hyperparams['fine_tuned']=True
     rand_acc = locateHighestAcc(hyperparams,'FTIA',dataset,type='test_acc')
-    print dataset
+    print(dataset)
 
-    print 'FTIA-rand'
-    print [round(value,4) for value in rand_acc]
+    print('FTIA-rand')
+    print([round(value,4) for value in rand_acc])
 
     # static glove vector
     hyperparams['isRand'] = False
     hyperparams['isStatic'] = True
     hyperparams['fine_tuned'] = False
     static_acc = locateHighestAcc(hyperparams, 'FTIA',dataset, type='test_acc')
-    print 'FTIA-static'
-    print [round(value,4) for value in static_acc]
+    print('FTIA-static')
+    print([round(value,4) for value in static_acc])
 
     # non-static = static+fine_tuned
     hyperparams['isRand'] = False
     hyperparams['isStatic'] = True
     hyperparams['fine_tuned'] = True
     non_static_acc = locateHighestAcc(hyperparams, 'FTIA',dataset, type='test_acc')
-    print 'FTIA-non-static'
-    print [round(value,4) for value in non_static_acc]
+    print('FTIA-non-static')
+    print([round(value,4) for value in non_static_acc])
 
     x = np.arange(len(rand_acc))
 
@@ -221,8 +219,8 @@ def reportHighestAcc(hyperparams):
     for data in dataset:
         for classifier in classifierset:
             result = searchDataByCondition(hyperparams,data,classifier,type='test_acc',range=100)
-            print data,' --- ',classifier,' --- ',round(max(result),4)*100,'%'
-        print ''
+            print(data,' --- ',classifier,' --- ',round(max(result),4)*100,'%')
+        print('')
 
 #tSNE visualization input data
 def tSNE_visualize(datasetType,classifierType,epoch=1):
@@ -278,7 +276,11 @@ def visualize_compare_Attention(datasetType, classifierType1, classifierType2):
     #review_idx = [2103,2021,2133,2074]
 
     #TREC
-    review_idx = [1009,2012,1508,5010]
+    #review_idx = [1009,2012,1508,5010]
+
+    # CR
+    review_idx = [59,225,147,155]
+
     #start=1508
     #review_idx =range(start,start+5)
 
@@ -296,9 +298,9 @@ def visualize_compare_Attention(datasetType, classifierType1, classifierType2):
     type2_visualize_weights = []
     for review in type1_visualize_reviews:
         correspond_idx = find_review_idx(review,type2_reviews)
-        print correspond_idx
+        print(correspond_idx)
         if correspond_idx==-1:
-            print '###Error not found review',review
+            print('###Error not found review',review)
         type2_visualize_reviews.append(type2_reviews[correspond_idx])
         type2_visualize_weights.append(type2_weights[correspond_idx])
     showAttentionWeightsForContent(type2_visualize_reviews, type2_visualize_weights,classifierType2)
@@ -323,11 +325,11 @@ def find_review_idx(single_review,reviews):
 
 #visualize different penalty for model FTIA in all 7 dataset
 def visualize_different_penalty():
-    from config import hyperparams
+    from .config import hyperparams
     dataset = ['CR', 'MR', 'SST1', 'SST2', 'MPQA', 'TREC', 'Subj']
     #dataset  = ['CR','MR']
-    print 'penalty: '
-    print [0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
+    print('penalty: ')
+    print([0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0])
     plt.cla()
     for dataset_idx in range(len(dataset)):
         datasetType = dataset[dataset_idx]
@@ -338,8 +340,8 @@ def visualize_different_penalty():
             acc_result = searchDataByCondition(hyperparams,datasetType,'FTIA',type='test_acc',range=100)
             high_acc_with_penalty.append(max(acc_result))
 
-        print 'dataset: ',datasetType
-        print [round(value,4) for value in high_acc_with_penalty]
+        print('dataset: ',datasetType)
+        print([round(value,4) for value in high_acc_with_penalty])
         #x_axis = range(1, len(high_acc_with_penalty) + 1)
         x_axis = np.arange(0, 1.1, 0.1)
         plt.plot(x_axis, high_acc_with_penalty, color=global_colors[dataset_idx], marker='.')
@@ -356,8 +358,10 @@ def visualize_different_penalty():
 
 #visualize runing times for one epoch
 def visualize_running_time():
-    value = [2.2,0.5,1.5,4.1,2.3,5.3,3.9]
-    classifierSet = ['FTIA','TextCNN','LSTM','BiGRU','LSTMAtt','RCNN','SelfAtt']
+    #value = [2.2,0.5,1.5,4.1,2.3,5.3,3.9]
+    #classifierSet = ['FTIA','TextCNN','LSTM','BiGRU','LSTMAtt','RCNN','SelfAtt']
+
+    value = [2.2, 0.5, 4.1, 2.3, 3.9]
     plt.cla()
     '''
     #N = 20
@@ -376,7 +380,9 @@ def visualize_running_time():
     plt.show()
     '''
     plt.rcParams['font.sans-serif'] = ['SimHei']
-    name =['FTIA-static','TextCNN','LSTM','BiGRU','LSTMAtt','RCNN','SelfAtt']  # 标签
+    #name =['FTIA-static','TextCNN','LSTM','BiGRU','LSTMAtt','RCNN','SelfAtt']  # 标签
+    name =['FTIA','TextCNN','BiGRU','LSTMAtt','SelfAtt']  # 标签
+
     theta = np.linspace(0, 2 * np.pi, len(name), endpoint=False)  # 将圆根据标签的个数等比分
     theta = np.concatenate((theta, [theta[0]]))  # 闭合
     value = np.concatenate((value, [value[0]]))  # 闭合
@@ -389,7 +395,7 @@ def visualize_running_time():
     ax.set_theta_zero_location('N')  # 设置极轴方向
     #ax.set_title('CR数据集下各模型运行时间对比图', fontsize=16)  # 添加图描述
     #plt.show()
-    plt.savefig(fig_path+'Models_runtim_comp')
+    plt.savefig(fig_path+'Models_runtime_comp')
 
 def visualize_params_num():
     #plt.cla()
@@ -403,7 +409,7 @@ def visualize_params_num():
 
     name_list = ['FTIA','TextCNN','LSTM','BiGRU','LSTMAtt','RCNN','SelfAtt']
     num_list = np.array([4349402,3676232,4308802,4870802,4308802,5392202,16392082])/2500000
-    print num_list
+    print(num_list)
     plt.barh(range(len(num_list)), num_list, color='darkgreen', tick_label=name_list, align='center')
     for a, b in zip(range(len(num_list)), num_list):
         plt.text(b + x_change, a - y_change, '%.2f' % round(b /1000000, 2), ha='center', va='bottom',
@@ -497,13 +503,16 @@ if __name__ =='__main__':
     #visualize different penalty
     #visualize_different_penalty()
 
-    #visualize_running_time()
+    visualize_running_time()
 
     #visualize_Attention('MR','FTIA',0.1 )
     #visualize_Attention('MR', 'FTIA', 0.1)
     #visualize_Attention('MR','SelfAtt',0.1)
     #visualize_compare_Attention('MR','FTIA','SelfAtt',0.1)
-    visualize_compare_Attention('TREC', 'FTIA', 'SelfAtt')
+    #visualize_compare_Attention('TREC', 'FTIA', 'SelfAtt')
+
+    #visualize_compare_Attention('CR', 'FTIA', 'SelfAtt')
+
 
 
     #visualize params nums

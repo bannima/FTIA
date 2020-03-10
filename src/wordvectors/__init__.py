@@ -7,7 +7,10 @@ Author: Barry Chow
 Date: 2019/3/13 9:35 PM
 Version: 0.1
 """
-import sys
+from .pretrain_wordvectors import PretrainedWordVectors
+from .static_vectors import StaticWordVectors
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+__all__ = [
+    'PretrainedWordVectors',
+    'StaticWordVectors'
+]

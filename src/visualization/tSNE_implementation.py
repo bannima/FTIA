@@ -7,9 +7,6 @@ Author: Barry Chow
 Date: 2019/3/22 9:43 AM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 from sklearn.manifold import TSNE
 from sklearn.datasets import load_iris,load_digits
@@ -45,7 +42,7 @@ def t_SNE_visualization(datasetType,classifierType,data,labels,idx2label,epoch=1
     filename = 'tSNE_Epoch'+str(epoch)+'_' + datasetType + '_' + classifierType
     plt.cla()
     #plt.figure(figsize=(8, 8))
-    print '--- t-SNE visualization for dataset',datasetType,' ---'
+    print('--- t-SNE visualization for dataset',datasetType,' ---')
     x_tsne = TSNE(n_components=2,random_state=33).fit_transform(data)
     data = np.array(x_tsne)
     for label_idx in idx2label.keys():

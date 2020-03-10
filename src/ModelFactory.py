@@ -7,18 +7,15 @@ Author: Barry Chow
 Date: 2019/3/18 4:51 PM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
 import abc
 import logging
-from models.BiGRU import BiGRU
-from models.FTIA import FTIA
-from models.TextCNN import TextCNNClassifer
-from models.LSTM import LSTMClassifier
-from models.LSTM_Attention import LSTM_Attention
-from models.RCNN import RCNNClassifier
-from models.SelfAttention import SelfAttentionClassifier
+from .models import BiGRU
+from .models import FTIA
+from .models import TextCNNClassifer
+from .models import LSTMClassifier
+from .models import LSTM_Attention
+from .models import RCNNClassifier
+from .models import SelfAttentionClassifier
 
 class AbstractModelFactory(object):
     __metaclass__ = abc.ABCMeta

@@ -7,9 +7,9 @@ Author: Barry Chow
 Date: 2019/1/29 10:52 AM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#import sys
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 import re
 
 

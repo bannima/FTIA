@@ -7,9 +7,6 @@ Author: Barry Chow
 Date: 2019/1/29 10:46 AM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
 import numpy as np
 
 #global  settings
@@ -32,7 +29,7 @@ hyperparams = {
     'N_EPOCHS': 100,
     'LEARNING_RATE': 1e-3,
     'PENALTY_CONFFICIENT': 0.1,
-    'isRand': False,
+    'isRand': True,
     'isStatic': True,
     'fine_tuned':False,
 }
@@ -40,8 +37,8 @@ hyperparams = {
 global_datasetType = ''
 global_classifierType = ''
 
-result_filename = './all_results.csv'
-#result_filename = './all_results_patent.csv'
+#result_filename = './all_results.csv'
+result_filename = './all_results_patent.csv'
 #result_filename = './all_results_penalty.csv'
 #result_filename = './all_results_variations.csv'
 

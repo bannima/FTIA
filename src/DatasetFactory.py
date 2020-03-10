@@ -7,20 +7,18 @@ Author: Barry Chow
 Date: 2019/3/18 4:04 PM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+
 import abc
-from dataloader.MovieReview_Loader import MovieReviewDataLoader
-from dataloader.TREC_Loader import TRECDataLoader
-from dataloader.TwentyNews_Loader import TwentyNewsDataLoader
-from dataloader.Subj_Loader import SubjDatasetLoader
-from dataloader.MPQA_Loader import MPQADataLoader
-from dataloader.AGNews_Loader import AGNewsDataLoader
-from dataloader.CustomerReview_Loader import CustomerReviewDataLoader
-from dataloader.SST1_Loader import SST1DataLoader
-from dataloader.SST2_Loader import SST2DataLoader
-from dataloader.UsptoPatent_Loader import UsptoPatentDataLoader
+from .dataloader import MovieReviewDataLoader
+from .dataloader import TRECDataLoader
+from .dataloader import TwentyNewsDataLoader
+from .dataloader import SubjDatasetLoader
+from .dataloader import MPQADataLoader
+from .dataloader import AGNewsDataLoader
+from .dataloader import CustomerReviewDataLoader
+from .dataloader import SST1DataLoader
+from .dataloader import SST2DataLoader
+from .dataloader import UsptoPatentDataLoader
 import logging
 
 

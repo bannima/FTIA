@@ -8,9 +8,9 @@ Date: 2019/2/2 12:30 PM
 Version: 0.1
 """
 from __future__ import print_function
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#import sys
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 import random
 import torch
 import torch.nn as nn

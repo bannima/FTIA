@@ -7,9 +7,9 @@ Author: Barry Chow
 Date: 2019/1/30 10:36 AM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#import sys
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
@@ -71,10 +71,10 @@ class TRECDataset(object):
         for word in self.word2idx.keys():
             self.ltf_ilf[:,self.word2idx[word]] = self._calc_ilf(self.ltf_ilf[:, self.word2idx[word]]) * self.ltf_ilf[:, self.word2idx[word]]
 
-        print ' num of words in vocabulary ', len(self.word2idx.keys())
-        print ' num of samples in train dataset', len(self.train_dataset)
-        print ' num of samples in test dataset', len(self.test_dataset)
-        print ' num of samples in all dataset', len(self.train_dataset) + len(self.test_dataset)
+        print(' num of words in vocabulary ', len(self.word2idx.keys()))
+        print(' num of samples in train dataset', len(self.train_dataset))
+        print(' num of samples in test dataset', len(self.test_dataset))
+        print(' num of samples in all dataset', len(self.train_dataset) + len(self.test_dataset))
 
 
     #calc inverse label frequency given vector

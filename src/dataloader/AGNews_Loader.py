@@ -7,9 +7,9 @@ Author: Barry Chow
 Date: 2019/2/2 11:37 PM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#import sys
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 import torch
 import torch.nn as nn
 from preprocess import clean_str

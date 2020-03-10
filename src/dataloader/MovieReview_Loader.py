@@ -7,9 +7,10 @@ Author: Barry Chow
 Date: 2019/1/29 10:44 AM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+from __future__ import print_function
+#import sys
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 import torch
 from torch.utils.data import DataLoader,Dataset
 import random
@@ -81,10 +82,10 @@ class MovieReviewDataset(object):
         random.shuffle(self.train_dataset)
         random.shuffle(self.test_dataset)
 
-        print ' num of words in vocabulary ', len(self.word2idx.keys())
-        print ' num of samples in train dataset', len(self.train_dataset)
-        print ' num of samples in test dataset', len(self.test_dataset)
-        print ' num of samples in all dataset',len(self.train_dataset)+len(self.test_dataset)
+        print(' num of words in vocabulary ', len(self.word2idx.keys()))
+        print(' num of samples in train dataset', len(self.train_dataset))
+        print(' num of samples in test dataset', len(self.test_dataset))
+        print(' num of samples in all dataset',len(self.train_dataset)+len(self.test_dataset))
 
 
     def get_idx2word(self):

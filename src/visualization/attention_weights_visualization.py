@@ -7,9 +7,7 @@ Author: Barry Chow
 Date: 2019/3/26 4:08 PM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+
 import csv
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
@@ -103,13 +101,13 @@ def showAttentionWeightsForContent(contents,attweights,classifierType):
                 y -=0.09
 
             #print x,len(word),'---',word,' --- ',weight
-            print word,
-        print ' '
+            print(word)
+        print(' ')
         #reset coordinates
         x = 0.05
         y -= 0.14
     #plt.show()
-    plt.savefig('../figs/'+'comp_negative_'+classifierType+'_weights_visualization')
+    plt.savefig('../figs/'+'comp_positive_'+classifierType+'_weights_visualization')
 
 
 if __name__ =='__main__':

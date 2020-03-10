@@ -7,9 +7,7 @@ Author: Barry Chow
 Date: 2019/3/13 9:36 PM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+
 import torch
 import os
 
@@ -27,7 +25,7 @@ class StaticWordVectors():
                 self.word2vec[word2idx[word]]=torch.tensor(vector)
                 count+=1
 
-        print count,len(word2idx.keys())
+        print(count,len(word2idx.keys()))
 
     def get_wordVectors(self):
         return self.word2vec

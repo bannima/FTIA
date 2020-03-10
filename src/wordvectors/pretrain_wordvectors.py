@@ -7,9 +7,9 @@ Author: Barry Chow
 Date: 2019/3/14 2:26 PM
 Version: 0.1
 """
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#import sys
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 from gensim.models import Word2Vec
 import os
 import torch
@@ -32,7 +32,7 @@ class PretrainedWordVectors():
             try:
                 vector = torch.tensor(model.wv.word_vec(word))
             except Exception:
-                print word
+                print(word)
                 continue
             self.word2vec[word2idx[word]]=vector
 
