@@ -12,6 +12,7 @@ from sklearn.manifold import TSNE
 from sklearn.datasets import load_iris,load_digits
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
+plt.switch_backend('agg')
 import os
 import numpy as np
 global_colors = ['green',"crimson",'blue','turquoise','gray','orange','violet']
@@ -54,7 +55,7 @@ def t_SNE_visualization(datasetType,classifierType,data,labels,idx2label,epoch=1
         #plt.legend(['a','b','c','d','e','f'],loc='upper right',fontsize='large')
     plt.legend(loc='upper right',fontsize='medium')
     #plt.show()
-    plt.savefig('../figs/'+filename)
+    plt.savefig('../figs/'+filename+'.svg',dpi=600,format='svg')
 
 if __name__ =='__main__':
     digits = load_digits()

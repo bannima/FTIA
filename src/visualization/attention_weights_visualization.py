@@ -13,7 +13,8 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 #from imblearn.over_sampling import BorderlineSMOTE
 #from sklearn.model_selection import GridSearchCV
-from src.config import result_filename
+#from config import result_filename
+
 import numpy as np
 #global settings
 import math
