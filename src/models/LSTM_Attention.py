@@ -64,7 +64,7 @@ class LSTM_Attention(nn.Module):
         weighted_output = self.attention(output,final_hidden_state[-1])
 
         # save text representations
-        #saveTextRepresentations('TREC', 'LSTMAtt', weighted_output.detach().numpy())
+        saveTextRepresentations('TREC', 'LSTMAtt', weighted_output.detach().cpu().numpy())
 
         #use the last layer output as fc's input
         #no need to unpack, since we are going to use hidden

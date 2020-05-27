@@ -72,7 +72,7 @@ class FTIA(nn.Module):
         # attention layers
         att_output, weights = self.label_attention(output, label_embedded)
         #save text representations
-        #saveTextRepresentations(global_datasetType,global_classifierType,att_output.detach().numpy())
+        saveTextRepresentations(self.datasetType,'FTIA',att_output.detach().cpu().numpy())
 
         #penalty
         penalty = self.calc_penalty(weights)
@@ -101,7 +101,7 @@ class FTIA(nn.Module):
         weights = F.softmax(weights,dim=1)
 
         #save weights
-        save_attention_weights(self.datasetType,'FTIA',weights.squeeze(2).detach().numpy())
+        #save_attention_weights(self.datasetType,'FTIA',weights.squeeze(2).detach().numpy())
 
         # BXIXS * BXSX1 = BXIX1
         weighted_output = torch.bmm(output, weights)

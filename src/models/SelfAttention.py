@@ -73,13 +73,17 @@ class SelfAttentionClassifier(nn.Module):
         attention_weight_matrix = self.attention_net(output)
 
         # save weights
-        save_attention_weights(self.datasetType,'SelfAtt',torch.sum(attention_weight_matrix,dim=1).detach().numpy())
+        #save_attention_weights(self.datasetType,'SelfAtt',torch.sum(attention_weight_matrix,dim=1).detach().numpy())
 
         penalty = self.calc_penalty(attention_weight_matrix)
         hidden_matrix = torch.bmm(attention_weight_matrix,output)
 
 
         fc_output = self.fc(hidden_matrix.view(-1,hidden_matrix.size()[1]*hidden_matrix.size()[2]))
+
+        #save text representations
+        saveTextRepresentations(self.datasetType, 'SelfAtt', fc_output.detach().cpu().numpy())
+
 
         logits = self.label(fc_output)
 
@@ -101,12 +105,12 @@ class SelfAttentionClassifier(nn.Module):
         attention_weight_matrix = attention_weight_matrix.permute(0,2,1)
         attention_weight_matrix = F.softmax(attention_weight_matrix,dim=2)
 
-        return attention_weight_matrix
+        return attention_weight_matrix.cuda()
 
     def calc_penalty(self,attention_weight_matrix):
         dim = attention_weight_matrix.shape[1]
-        A_T = attention_weight_matrix.permute(0,2,1)
-        penalty = torch.norm(torch.bmm(attention_weight_matrix,A_T)-torch.eye(1),p='fro',dim=[1,2])
+        A_T = attention_weight_matrix.permute(0,2,1).cuda()
+        penalty = torch.norm(torch.bmm(attention_weight_matrix,A_T)-torch.eye(1).cuda(),p='fro',dim=[1,2])
         return Variable(torch.mean(penalty),requires_grad=True)
         #return penalty
 

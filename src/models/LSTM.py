@@ -19,7 +19,7 @@ from tools import saveTextRepresentations
 
 class LSTMClassifier(nn.Module):
     def __init__(self,input_size,hidden_size,output_size,
-                 n_layers,bidirectional=False,word_vector= None,fine_tuned=False):
+                 n_layers,bidirectional=True,word_vector= None,fine_tuned=False):
         super(LSTMClassifier, self).__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size
@@ -62,6 +62,7 @@ class LSTMClassifier(nn.Module):
 
         #no penalty
         return self.fc(final_hidden_state[-1]),0.0
+
 
 
 
