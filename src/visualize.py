@@ -13,10 +13,10 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 #from imblearn.over_sampling import BorderlineSMOTE
 #from sklearn.model_selection import GridSearchCV
-from src.config import result_filename
+from config import result_filename
 import numpy as np
-from .tools import load_attention_weights,load_contents
-from .visualization.tSNE_implementation import t_SNE_visualization
+from tools import load_attention_weights,load_contents
+from visualization.tSNE_implementation import t_SNE_visualization
 #global settings
 myfont = fm.FontProperties(fname='/Users/Barry/Library/Fonts/SimHei.ttf')
 epochs = 10
@@ -25,8 +25,8 @@ target_names = ['A','B','C']
 global_colors = ['darkgreen',"crimson",'dodgerblue','darkturquoise','dimgray','darkviolet','darkorange']
 
 fig_path = '../figs/'
-from .tools import loadTextRepresentations,loadTextLabels
-from .visualization.attention_weights_visualization import showAttentionWeightsForContent
+from tools import loadTextRepresentations,loadTextLabels
+from visualization.attention_weights_visualization import showAttentionWeightsForContent
 
 def visualization_acc(x_axis,data,filename,x_label='epochs'):
     plt.cla()
@@ -214,8 +214,11 @@ def locateHighestAcc(hyperparams,classifierType,dataset,type='test_acc'):
 def reportHighestAcc(hyperparams):
     #dataset = ['CR','MR','SST1','SST2', 'MPQA','TREC','Subj']
     #classifierset = ['TextCNN','LSTM','BiGRU', 'LSTMAtt', 'RCNN', 'SelfAtt', 'FTIA']
-    dataset = ['UsptoPatent']
-    classifierset = ['FTIA','LSTM','LSTMAtt']
+    #dataset = ['UsptoPatent']
+    #classifierset = ['FTIA','BiGRU','LSTMAtt','SelfAtt','TextCNN']
+
+    dataset = ['CR', 'SST1', 'Subj', 'TREC', 'UsptoPatent']
+    classifierset = ['LSTM','FTIA']
     for data in dataset:
         for classifier in classifierset:
             result = searchDataByCondition(hyperparams,data,classifier,type='test_acc',range=100)
@@ -236,6 +239,7 @@ def visualize_Attention(datasetType,classifierType,penalty):
     start= 21
 
     #length = 2
+
 
     #positive
     #review_idx = [103,104,7003,2010,2011]
@@ -473,7 +477,9 @@ def visualize_case_stduy(isCorrect = True):
 
 
 if __name__ =='__main__':
-    from src.config import hyperparams
+    from config import hyperparams
+
+    reportHighestAcc(hyperparams)
 
     #src.main import hyperparams
     #visualizeMoreDataset('MPQA',['LSTM','LSTMAtt','BiGRU','RCNN','SelfAtt','FTIA'],hyperparams,type='test_acc',range=40,ylabel="准确率")
@@ -503,7 +509,7 @@ if __name__ =='__main__':
     #visualize different penalty
     #visualize_different_penalty()
 
-    visualize_running_time()
+    #visualize_running_time()
 
     #visualize_Attention('MR','FTIA',0.1 )
     #visualize_Attention('MR', 'FTIA', 0.1)

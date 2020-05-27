@@ -7,18 +7,19 @@ Author: Barry Chow
 Date: 2019/3/18 4:04 PM
 Version: 0.1
 """
+print('__file__={0:<35} | __name__={1:<20} | __package__={2:<20}'.format(__file__,__name__,str(__package__)))
 
 import abc
-from .dataloader import MovieReviewDataLoader
-from .dataloader import TRECDataLoader
-from .dataloader import TwentyNewsDataLoader
-from .dataloader import SubjDatasetLoader
-from .dataloader import MPQADataLoader
-from .dataloader import AGNewsDataLoader
-from .dataloader import CustomerReviewDataLoader
-from .dataloader import SST1DataLoader
-from .dataloader import SST2DataLoader
-from .dataloader import UsptoPatentDataLoader
+from dataloader import MovieReviewDataLoader
+from dataloader import TRECDataLoader
+from dataloader import TwentyNewsDataLoader
+from dataloader import SubjDatasetLoader
+from dataloader import MPQADataLoader
+from dataloader import AGNewsDataLoader
+from dataloader import CustomerReviewDataLoader
+from dataloader import SST1DataLoader
+from dataloader import SST2DataLoader
+from dataloader import UsptoPatentDataLoader
 import logging
 
 

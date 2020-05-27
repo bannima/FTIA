@@ -7,6 +7,7 @@ Author: Barry Chow
 Date: 2019/1/29 10:44 AM
 Version: 0.1
 """
+print('__file__={0:<35} | __name__={1:<20} | __package__={2:<20}'.format(__file__,__name__,str(__package__)))
 
 import torch
 import torch.nn as nn
@@ -19,13 +20,13 @@ from tools import saveTextRepresentations,saveTextLabels
 from tools import delMiddleReprLabelFiles,delMiddleContentWeightFiles
 from tools import save_attention_weights,save_contents
 import csv
-from .config import result_filename
-from .config import hyperparams
-#from visualization.tSNE_implementation import t_SNE_visualization
+from config import result_filename
+from config import hyperparams
+from visualization.tSNE_implementation import t_SNE_visualization
 import numpy as np
-from .tools import loadTextRepresentations,loadTextLabels
-from .config import global_datasetType,global_classifierType
-from .datetime import datetime
+from tools import loadTextRepresentations,loadTextLabels
+from config import global_datasetType,global_classifierType
+from datetime import datetime
 
 def str2arr(content,word2idx):
     content = [word2idx[word] for word in content.split()]
@@ -70,12 +71,12 @@ def train(train_loader,word2idx,label2idx,penalty_confficient,global_same_length
     train_data_size = len(train_loader.dataset)
     for i,(reviews,labels) in enumerate(train_loader,1):
         #save reviews
-        save_contents(datasetType, classifierType, reviews)
+        #save_contents(datasetType, classifierType, reviews)
 
         input,seq_lengths,labels = make_variables(reviews,labels,word2idx,label2idx,global_same_length)
 
         #save text labels
-        #saveTextLabels(global_datasetType,globale_classifierType,labels.data.numpy())
+        saveTextLabels(datasetType,classifierType,labels.data.cpu().numpy())
 
         #output = classifier(input,seq_lengths,labels)
         output,penalty = classifier(input,seq_lengths,labels)
@@ -162,7 +163,7 @@ def test(test_loader,word2idx,label2idx,global_same_length,classifier,idx2label)
     return float(correct)/test_data_size
 
 #run model
-def run_model_with_hyperparams(hyperparams,datasetType,classifierType,imp_tSNE=False):
+def run_model_with_hyperparams(hyperparams,datasetType,classifierType,imp_tSNE=True):
 
     #set global dataset and classifiertype for tSNE
 
@@ -220,13 +221,14 @@ def run_model_with_hyperparams(hyperparams,datasetType,classifierType,imp_tSNE=F
     # optimizer = torch.optim.Adam(classifier.parameters(),lr=learning_rate)
     optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, classifier.parameters()), lr=LEARNING_RATE)
 
+
     #run model and test
     test_acc_with_epochs = []
     train_acc_with_epochs = []
     train_loss_with_epochs = []
     for epoch in range(1,N_EPOCHS+1):
         #del middle files
-        #delMiddleReprLabelFiles('TREC', classifierType)
+        delMiddleReprLabelFiles('TREC', classifierType)
         delMiddleContentWeightFiles(datasetType,classifierType)
         starttime = datetime.now()
         print('/n')
@@ -240,12 +242,12 @@ def run_model_with_hyperparams(hyperparams,datasetType,classifierType,imp_tSNE=F
         print(global_datasetType, ' --- one batch needs seconds ---', (endtime - starttime).seconds)
 
         #which epochs to visualize using tSNE
-        '''
+
         if imp_tSNE and epoch in [1,5,10,20,30,40,70,100]:
             textRepr = loadTextRepresentations('TREC',classifierType)
             textLabels = loadTextLabels('TREC',classifierType)
             t_SNE_visualization('TREC',classifierType,textRepr,textLabels,idx2label,epoch)
-        '''
+
 
     #save train ,test accuracy and train loss result
     saveCSVResult(hyperparams,datasetType,classifierType,test_acc_with_epochs,type='test_acc')
@@ -361,11 +363,22 @@ if __name__ =='__main__':
     #run_model_with_hyperparams(hyperparams, datasetType='UsptoPatent', classifierType='FTIA')
 
     #attention weight visualization
-    for model in ['TextCNN','BiGRU','LSTMAtt','SelfAtt','FTIA']:
-        run_model_with_hyperparams(hyperparams,datasetType='UsptoPatent',classifierType=model)
+    #for model in ['SelfAtt','FTIA','TextCNN','BiGRU','LSTMAtt']:
+    #    run_model_with_hyperparams(hyperparams,datasetType='UsptoPatent',classifierType=model)
+
 
     #attention weight for TREC
     #run_model_with_hyperparams(hyperparams, datasetType='TREC', classifierType='SelfAtt')
 
     # attention weight for CR
     #run_model_with_hyperparams(hyperparams, datasetType='CR', classifierType='FTIA')
+
+    #add BiLSTM
+    #for data in ['CR','SST1','Subj','TREC','UsptoPatent']:
+    #    for classifier in ['LSTM','FTIA']:
+    #       run_model_with_hyperparams(hyperparams,datasetType=data,classifierType=classifier)
+
+    # add scatter figure for SelfAtt and FTIA using TREC dataset
+    for data in ['TREC']:
+        for classifier in ['SelfAtt','FTIA','LSTMAtt']:
+            run_model_with_hyperparams(hyperparams,datasetType=data,classifierType=classifier)

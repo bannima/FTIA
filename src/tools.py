@@ -9,9 +9,9 @@ Version: 0.1
 """
 from torch.autograd import Variable
 import torch
-from .wordvectors import StaticWordVectors
-from .wordvectors import PretrainedWordVectors
-from .config import result_filename
+from wordvectors import StaticWordVectors
+from wordvectors import PretrainedWordVectors
+from config import result_filename
 import csv
 import os
 import numpy as np

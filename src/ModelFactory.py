@@ -9,13 +9,13 @@ Version: 0.1
 """
 import abc
 import logging
-from .models import BiGRU
-from .models import FTIA
-from .models import TextCNNClassifer
-from .models import LSTMClassifier
-from .models import LSTM_Attention
-from .models import RCNNClassifier
-from .models import SelfAttentionClassifier
+from models import BiGRU
+from models import FTIA
+from models import TextCNNClassifer
+from models import LSTMClassifier
+from models import LSTM_Attention
+from models import RCNNClassifier
+from models import SelfAttentionClassifier
 
 class AbstractModelFactory(object):
     __metaclass__ = abc.ABCMeta

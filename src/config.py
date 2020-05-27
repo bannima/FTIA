@@ -22,6 +22,7 @@ import numpy as np
     'fine_tuned':False,
 }'''
 
+
 hyperparams = {
     'HIDDEN_SIZE': 200,
     'BATCH_SIZE': 32,
@@ -29,17 +30,21 @@ hyperparams = {
     'N_EPOCHS': 100,
     'LEARNING_RATE': 1e-3,
     'PENALTY_CONFFICIENT': 0.1,
-    'isRand': True,
+    'isRand': False,
     'isStatic': True,
     'fine_tuned':False,
 }
+
 
 global_datasetType = ''
 global_classifierType = ''
 
 #result_filename = './all_results.csv'
-result_filename = './all_results_patent.csv'
+#result_filename = './all_results_patent_2021.csv'
 #result_filename = './all_results_penalty.csv'
 #result_filename = './all_results_variations.csv'
+#result_filename  = './all_results_biLSTM_2020.csv'
+result_filename  = './all_results_scatter.csv'
+
 
 
