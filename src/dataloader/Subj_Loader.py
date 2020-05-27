@@ -13,7 +13,7 @@ Version: 0.1
 import random
 import torch
 import torch.nn as nn
-from preprocess import clean_str
+from .preprocess import clean_str
 from torch.utils.data import Dataset,DataLoader
 
 class Subj_dataset(object):
@@ -36,7 +36,7 @@ class Subj_dataset(object):
         self.occupy = occpy
         self.corpus = []
         #load dataset
-        for line in open(filename):
+        for line in open(filename,encoding='utf-16'):
             label = line.split()[0]
             self.labels.append(label)
             content = clean_str(' '.join(line.split()[1:]))

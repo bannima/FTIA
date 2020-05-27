@@ -16,7 +16,7 @@ import torch.nn as nn
 from torch.autograd import Variable
 from torch.utils.data import Dataset,DataLoader
 import os
-from preprocess import clean_str
+from .preprocess import clean_str
 
 class TwentyNewsDataset(object):
     def __init__(self,is_train_set=True,occupy = 0.7):

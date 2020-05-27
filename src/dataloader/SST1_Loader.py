@@ -13,7 +13,7 @@ Version: 0.1
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset,DataLoader
-from preprocess import clean_str
+from .preprocess import clean_str
 
 class SST1DataLoader(Dataset):
     def __init__(self,is_train_set=True,occupy= 0.7):

@@ -14,7 +14,7 @@ from __future__ import print_function
 import torch
 from torch.utils.data import DataLoader,Dataset
 import random
-from preprocess import clean_str
+from .preprocess import clean_str
 
 class MovieReviewDataset(object):
     def __init__(self,is_train_set=True,occupy=0.7):

@@ -11,7 +11,7 @@ Version: 0.1
 #reload(sys)
 #sys.setdefaultencoding('utf-8')
 from torch.utils.data import Dataset,DataLoader
-from preprocess import clean_str
+from .preprocess import clean_str
 
 class SST2DataLoader(Dataset):
     def __init__(self,is_train_set=True,occupy=0.7):

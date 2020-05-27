@@ -11,7 +11,7 @@ Version: 0.1
 #reload(sys)
 #sys.setdefaultencoding('utf-8')
 from torch.utils.data import DataLoader,Dataset
-from preprocess import clean_str
+from .preprocess import clean_str
 import random
 
 class UsptoPatentDataset(object):

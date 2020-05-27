@@ -13,10 +13,10 @@ Version: 0.1
 import torch
 import torch.nn as nn
 import random
-from preprocess import clean_str
+from .preprocess import clean_str
 from torch.utils.data import Dataset,DataLoader
-from torchtext import data
-from torchtext.vocab import Vectors,GloVe
+#from torchtext import data
+#from torchtext.vocab import Vectors,GloVe
 
 class CustomerReviewDataset(object):
     def __init__(self,is_train_set=True,occupy=0.7):

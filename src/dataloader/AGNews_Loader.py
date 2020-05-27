@@ -12,7 +12,7 @@ Version: 0.1
 #sys.setdefaultencoding('utf-8')
 import torch
 import torch.nn as nn
-from preprocess import clean_str
+from .preprocess import clean_str
 import random
 from torch.utils.data import Dataset,DataLoader
 

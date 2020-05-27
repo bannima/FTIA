@@ -14,7 +14,7 @@ import torch
 import torch.nn as nn
 from torch.autograd import Variable
 from torch.utils.data import DataLoader,Dataset
-from preprocess import clean_str
+from .preprocess import clean_str
 import math
 
 class TRECDataset(object):
@@ -60,7 +60,7 @@ class TRECDataset(object):
             idx+=1
 
         #generate ltf-ilf using train dataset
-        print 'ltf-ilf'
+        print('ltf-ilf')
         self.ltf_ilf = torch.zeros(self.get_output_size(),len(self.word2idx.keys()),dtype=torch.float32)
         for data,label in zip(self.train_dataset,self.train_labels):
             words = data.split(' ')
@@ -90,7 +90,7 @@ class TRECDataset(object):
         contents = []
         labels = []
         max_seq_len = -1
-        for line in open(filename):
+        for line in open(filename,encoding='utf-8'):
             content = clean_str(' '.join(line.split(' ')[1:]))
             contents.append(content)
             if len(content) > max_seq_len:

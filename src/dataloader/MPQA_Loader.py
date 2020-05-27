@@ -14,7 +14,7 @@ from __future__ import print_function
 import random
 import torch
 import torch.nn as nn
-from preprocess import clean_str
+from .preprocess import clean_str
 from torch.utils.data import Dataset,DataLoader
 
 class MPQA_Dataset(object):
