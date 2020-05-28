@@ -2,7 +2,7 @@
 FTIA: Fusion of Task-specific Information based Attention Mechanism for Text Representation Learning
 
 ##1.Environmental Requirements
-- python=2.7
+- python=3.5
 - pytorch=1.0
 - GPU optional but recommended !
 
