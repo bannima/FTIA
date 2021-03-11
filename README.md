@@ -1,7 +1,7 @@
-#FTIA
+# FTIA
 FTIA: Fusion of Task-specific Information based Attention Mechanism for Text Representation Learning
 
-##1.Environmental Requirements
+## 1.Environmental Requirements
 - python=3.5
 - pytorch=1.0
 - GPU optional but recommended !
@@ -9,7 +9,7 @@ FTIA: Fusion of Task-specific Information based Attention Mechanism for Text Rep
 Please download GloVe word vectors in dir src/wordvectors/.static_vector_cache. More details can be found
 in https://nlp.stanford.edu/projects/glove/
 
-##2.Datasets
+## 2.Datasets
 Nine text classification datasets are used in our experiment.
 
 |Dataset | Classes| Source
@@ -25,14 +25,14 @@ SST-1| 5|https://nlp.stanford.edu/sentiment/
 SST-2|2| https://nlp.stanford.edu/sentiment/
 
 
-##3.FTIA model
+## 3.FTIA model
 The FTIA model are constructed as follows:
 
 ![FTIA](figs/FTIA_model.png "FTIA Model")
 
 
-##4.Results
-###4.1 Accuracy
+## 4.Results
+### 4.1 Accuracy
 
 The experiment accuracy for each dataset and model are organized in the following table.
 
@@ -48,14 +48,14 @@ The experiment accuracy for each dataset and model are organized in the followin
 
 
 
-###4.2 Attention Weights
+### 4.2 Attention Weights
 
 We randomly visualized the five movie reviews with corresponding learned attention weights in MR dataset, for understanding
 the FTIA model. The figure is shown as follow:
 
 ![AttentionWeights](./figs/Attention_weights_visulaization_penalty01.png)
 
-###4.3 Text Representations
+### 4.3 Text Representations
 
 For better understanding of learned text representations, we use the data reduction tool
 t-SNE to transform orignal high dimensional text representations to 2-D vectors. Furthermore,
